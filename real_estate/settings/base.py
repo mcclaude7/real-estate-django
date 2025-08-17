@@ -3,7 +3,7 @@ from pathlib import Path
 
 env = environ.Env(DEBUG=(bool,False))
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent
+BASE_DIR = Path(__file__).resolve().parent.parent.parent
 environ.Env.read_env(BASE_DIR / ".env")
 
 # Quick-start development settings - unsuitable for production
@@ -29,6 +29,7 @@ DJANGO_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.sites',
 ]
+
 SITE_ID = 1
 
 THIRD_PARTY_APPS = [
@@ -39,7 +40,7 @@ THIRD_PARTY_APPS = [
 ]
 LOCAL_APPS = ['apps.common', 'apps.profiles', 'apps.ratings', 'apps.users']
 
-INSTALLED_APPS = [DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS]
+INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -119,7 +120,11 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
-STATIC_URL = '/static/'
+STATIC_URL = '/staticfiles/'
+STATIC_URL = BASE_DIR / 'staticfiles'
+STATICFILES_DIR = []
+MEDIA_URL = '/mediafiles/'
+MEDIA_ROOT = BASE_DIR / 'mediafiles'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
